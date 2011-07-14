@@ -1,0 +1,19 @@
+<%
+    estimated_hours = spent_hours = calculated_spent_hours = divergent_hours = remaining_hours = 0.0
+    @issues.each do |issue|
+        estimated_hours         += issue.estimated_hours        ||0.0
+        spent_hours             += issue.spent_hours            ||0.0
+        calculated_spent_hours  += issue.calculated_spent_hours ||0.0
+        divergent_hours         += issue.divergent_hours        ||0.0
+        remaining_hours         += issue.remaining_hours        ||0.0
+    end
+%>
+<p class="other-formats">
+    <strong><%= t :field_estimated_hours %>:</strong> <%= estimated_hours.round(2) %>, 
+    <strong><%= t :label_spent_time %>:</strong> <%= spent_hours.round(2) %>, 
+    <strong><%= t :label_calculated_spent_hours %>:</strong> <%= calculated_spent_hours.round(2) %>, 
+    <strong><%= t :label_divergent_hours %>:</strong> <%= divergent_hours.round(2) %>, 
+    <strong><%= t :label_remaining_hours %>:</strong> <%= remaining_hours.round(2) %>
+</p>
+
+
