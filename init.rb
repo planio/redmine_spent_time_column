@@ -13,4 +13,8 @@ Redmine::Plugin.register :redmine_spent_time_column do
   author 'Jan Schulz-Hofen, Planio GmbH'
   description 'This plugin adds a spent time column to issue lists.'
   version '1.1.0'
+
+  settings :default => {
+    'show_bottom_summary_line_on_issuelists' => '0'
+  }, :partial => 'settings/spent_time_column_settings'
 end
