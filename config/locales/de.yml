@@ -2,3 +2,4 @@
   label_calculated_spent_hours: Rechnerisch aufgewendete Zeit
   label_divergent_hours: Zeitabweichung
   label_remaining_hours: Verbleibende Zeit
+  setting_show_bottom_summary_line_on_issuelists: Display bottom summary line on issuelists

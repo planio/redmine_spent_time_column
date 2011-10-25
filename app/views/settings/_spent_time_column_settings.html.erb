@@ -1,0 +1,4 @@
+<p>
+  <label><%= l(:setting_show_bottom_summary_line_on_issuelists) %></label>
+  <%= check_box_tag 'settings[show_bottom_summary_line_on_issuelists]', 1, Setting.plugin_redmine_spent_time_column['show_bottom_summary_line_on_issuelists'] == '1' %>
+</p>
