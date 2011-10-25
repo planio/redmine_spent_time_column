@@ -1,20 +1,22 @@
 <%
     allowed_to_view_time_entries = true
     estimated_hours = spent_hours = calculated_spent_hours = divergent_hours = remaining_hours = 0.0
-    @issues.each do |issue|
-        if User.current.allowed_to?(:view_time_entries, issue.project)
-            estimated_hours         += issue.estimated_hours        ||0.0
-            spent_hours             += issue.spent_hours            ||0.0
-            calculated_spent_hours  += issue.calculated_spent_hours ||0.0
-            divergent_hours         += issue.divergent_hours        ||0.0
-            remaining_hours         += issue.remaining_hours        ||0.0
-        else
-            allowed_to_view_time_entries = false if not User.current.admin?
-            break
+    if Setting.plugin_redmine_spent_time_column['show_bottom_summary_line_on_issuelists'] == '1'
+        @issues.each do |issue|
+            if User.current.allowed_to?(:view_time_entries, issue.project)
+                estimated_hours         += issue.estimated_hours        ||0.0
+                spent_hours             += issue.spent_hours            ||0.0
+                calculated_spent_hours  += issue.calculated_spent_hours ||0.0
+                divergent_hours         += issue.divergent_hours        ||0.0
+                remaining_hours         += issue.remaining_hours        ||0.0
+            else
+                allowed_to_view_time_entries = false if not User.current.admin?
+                break
+            end
         end
     end
 %>
-<% if allowed_to_view_time_entries -%>
+<% if allowed_to_view_time_entries && Setting.plugin_redmine_spent_time_column['show_bottom_summary_line_on_issuelists'] == '1' -%>
 <p class="other-formats">
     <strong><%= t :field_estimated_hours %>:</strong> <%= estimated_hours.round(2) %>, 
     <strong><%= t :label_spent_time %>:</strong> <%= spent_hours.round(2) %>, 
